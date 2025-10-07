@@ -1,0 +1,172 @@
+:host {
+  display: block;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  background: #fff8f1;
+}
+
+.ofrenda-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem;
+}
+
+.ofrenda-header {
+  text-align: center;
+  color: #5b2a86;
+}
+
+.ofrenda-header h1 {
+  font-family: "Dancing Script", cursive;
+  font-size: 3rem;
+  color: #ff7b00;
+  margin: 0.5rem 0;
+}
+
+.ofrenda-header p.intro {
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.logos {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.logos img {
+  height: 60px;
+}
+
+.bases {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.bases h2 {
+  color: #5b2a86;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.bases-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.base {
+  background: #ffe5b4;
+  border-radius: 10px;
+  padding: 1rem;
+  flex: 1 1 280px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.base h3 {
+  color: #ff7b00;
+  margin-bottom: 0.5rem;
+}
+
+.fechas {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.fechas-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.fechas-grid div {
+  background: #5b2a86;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  min-width: 200px;
+}
+
+.fechas-grid h4 {
+  color: #ffcc70;
+  margin-bottom: 0.3rem;
+}
+
+.formulario {
+  background: #fff;
+  border-radius: 15px;
+  padding: 2rem;
+  margin-top: 3rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.formulario h2 {
+  text-align: center;
+  color: #5b2a86;
+}
+
+.formulario h3 {
+  margin-top: 1.5rem;
+  color: #ff7b00;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.form-group input {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 0.6rem;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #ff7b00;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.checkbox label {
+  margin-left: 0.5rem;
+}
+
+.btn-enviar {
+  background: #ff7b00;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  display: block;
+  width: 100%;
+}
+
+.btn-enviar:hover {
+  background: #e86e00;
+}
+
+@media (max-width: 768px) {
+  .bases-grid,
+  .fechas-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}
