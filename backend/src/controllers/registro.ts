@@ -88,3 +88,10 @@ export const saveregistro = async (req: Request, res: Response): Promise<any> =>
     }
    
   }
+
+  export const getregistros = async (req: Request, res: Response): Promise<any> => {
+    const registros = await Registro.findAll();
+    return res.json({
+        data: registros
+    });
+  }
