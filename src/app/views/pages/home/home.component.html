@@ -69,7 +69,7 @@
 
       <div class="form-group">
         <label>RFC</label>
-        <input type="text" formControlName="rfc" />
+        <input type="text" formControlName="rfc" (blur)="onRfcBlur()" />
         <small *ngIf="f['rfc'].invalid && f['rfc'].touched" class="error" >
           Campo obligatorio
         </small>

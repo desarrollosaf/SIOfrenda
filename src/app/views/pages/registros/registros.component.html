@@ -20,25 +20,25 @@
             *ngIf="rows.length > 0" [externalSorting]="true" [externalPaging]="true"    [footerHeight]="50"
             [rowHeight]="'auto'" [limit]="pageSize" [count]="filteredCount" [offset]="page" (page)="setPage($event)"
             [loadingIndicator]="loading">
-            <ngx-datatable-column prop="servidor_publico" [headerClass]="'text-center'" [cellClass]="'text-center'"
-              name="Servidor Público">
+            <ngx-datatable-column prop="responsable" [headerClass]="'text-center'" [cellClass]="'text-center'"
+              name="Responsable">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                {{ row.Nombre }}
+                {{ row.nombre_responsable }}
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="dependencia" [headerClass]="'text-center'" [cellClass]="'text-center'" name="Dependencia">
+            <ngx-datatable-column prop="edificio" [headerClass]="'text-center'" [cellClass]="'text-center'" name="Edifico">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                {{ row.dependencia.nombre_completo }}
+                {{ row.nombre_edificio }}
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="direccion" [headerClass]="'text-center'" [cellClass]="'text-center'" name="Direccion">
+            <ngx-datatable-column prop="telefono" [headerClass]="'text-center'" [cellClass]="'text-center'" name="Telefono">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                {{ row.direccion.nombre_completo}}
+                {{ row.telefono}}
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="departamento" [headerClass]="'text-center'" [cellClass]="'text-center'" name="Departamento">
+            <ngx-datatable-column prop="correo" [headerClass]="'text-center'" [cellClass]="'text-center'" name="Correo">
               <ng-template let-row="row" ngx-datatable-cell-template>
-                {{ row.departamento.nombre_completo }}
+                {{ row.correo }}
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Opciones">

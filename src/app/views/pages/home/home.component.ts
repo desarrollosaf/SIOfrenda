@@ -41,6 +41,33 @@ export class HomeComponent  implements OnInit {
     return this.ofrendaForm.controls;
   }
 
+  onRfcBlur() {
+    const rfc = this.ofrendaForm.get('rfc')?.value;
+    console.log(rfc)
+    if (rfc && this.ofrendaForm.get('rfc')?.valid) {
+      this.ofrendaService.getRFC(rfc).subscribe({
+        next: (data) => {
+          console.log(data)
+          this.ofrendaForm.patchValue({
+            responsable: data.Nombre,
+            cargo: data.Puesto+' / '+data.departamento.nombre_completo
+          });
+        },
+        error: (err) => {
+          console.error('Error al obtener datos del RFC', err);
+          // Opcional: limpiar los campos si no se encuentra el RFC
+          this.ofrendaForm.patchValue({
+            responsable: '',
+            cargo: ''
+          });
+        }
+      });
+    }
+  }
+
+  
+
+  
   onSubmit(): void {
     console.log('enviado')
     this.enviado = true;

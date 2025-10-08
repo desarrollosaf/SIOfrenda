@@ -34,8 +34,8 @@ export class RegistrosComponent {
   }
 
   getServidoresP() {
-    this.ofrendaService.getServidoresPublicos().subscribe({
-      next: (response) => {
+    this.ofrendaService.getRegistro().subscribe({
+      next: (response: any) => {
         console.log(response);
         this.originalData = [...response.data];
         this.temp = [...this.originalData];

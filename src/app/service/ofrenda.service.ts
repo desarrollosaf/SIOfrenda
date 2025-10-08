@@ -26,7 +26,7 @@ export class OfrendaService {
   }
 
   getRegistro():Observable<string> {
-    return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/saveregistro/`)
+    return this.http.get<string>(`${this.myAppUrl}${this.myAPIUrl}/getregistros/`)
   }
 
 

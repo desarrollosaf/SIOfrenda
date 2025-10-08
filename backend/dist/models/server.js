@@ -51,6 +51,7 @@ class Server {
             const publicPaths = [
                 '/api/user/login',
                 '/api/registro/datos/',
+                '/api/registro/saveregistro/',
             ];
             const isPublic = publicPaths.some(path => req.originalUrl.startsWith(path));
             if (isPublic) {
