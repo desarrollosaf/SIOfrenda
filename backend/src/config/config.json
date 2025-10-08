@@ -1,9 +1,9 @@
 {
   "development": {
-     "username": "homestead",
-     "password": "secret",
-     "database": "ofrenda",
-     "host": "192.168.10.10",
+     "username": "usr_ofrenda",
+     "password": "NlTGdIuM3Ao56D2PRM2F",
+     "database": "adminplem_ofrendas",
+     "host": "192.168.36.53",
      "dialect": "mysql"
   },
   "production": {

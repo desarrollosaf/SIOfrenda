@@ -38,8 +38,8 @@ class Server {
     midlewares(){
         this.app.use(express.json())
         this.app.use(cors({
-            origin: 'http://localhost:4200',
-            //origin: 'https://ofrendas.congresoedomex.gob.mx',
+            //origin: 'http://localhost:4200',
+            origin: 'https://ofrendas.congresoedomex.gob.mx',
             credentials: true
         }));
 
