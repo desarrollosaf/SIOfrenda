@@ -6,6 +6,7 @@ import routeUser from "../routes/user";
 import rcombos from  "../routes/combos";
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import routeRegistro from "../routes/registro";
 import { verifyToken } from '../middlewares/auth';
 class Server {
 
@@ -33,6 +34,7 @@ class Server {
         this.app.use(rpreguntas);
         this.app.use(rcombos);
         this.app.use(routeUser);
+         this.app.use(routeRegistro);
 
     }
 
@@ -50,6 +52,7 @@ class Server {
         this.app.use((req: Request, res: Response, next: NextFunction) => {
             const publicPaths = [
                 '/api/user/login',
+                '/api/registro/datos/',
             ];
             const isPublic = publicPaths.some(path => req.originalUrl.startsWith(path));
             if (isPublic) {
