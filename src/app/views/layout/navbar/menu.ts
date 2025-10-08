@@ -10,7 +10,7 @@ export const MENU: MenuItem[] = [
   {
     label: 'Reportes',
     icon: 'mail',
-    roles: ['GEN25'],
+    roles: ['OF'],
     subMenus: [
       {
         subMenuItems: [

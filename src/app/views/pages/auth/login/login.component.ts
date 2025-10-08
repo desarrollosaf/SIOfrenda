@@ -57,10 +57,13 @@ export class LoginComponent implements OnInit {
       next: (response: any) => {
         const userData = response.user;
         const bandera = response.bandera;
+        console.log(userData)
+        console.log(bandera)
+
         localStorage.setItem('isLoggedin', 'true'); 
         this._userService.setCurrentUser(userData);
-        if (bandera) {
-          this.router.navigate(['/cuestionario']);
+        if (!bandera) {
+          this.router.navigate(['/registros']);
         } else {
           this.router.navigate([this.returnUrl]);
         }

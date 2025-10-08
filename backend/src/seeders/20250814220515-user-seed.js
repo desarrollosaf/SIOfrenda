@@ -6,11 +6,11 @@ const { v4: uuidv4 } = require('uuid');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    const hashedPassword = await bcrypt.hash('password', 10);
+    const hashedPassword = await bcrypt.hash('ofrenda25c', 10);
 
     const users = [
-      { id: uuidv4(), name: 'GEN25SAGM990220', email: 'martin.sanchez@congresoedomex.gob.mx', password: hashedPassword },
-      { id: uuidv4(), name: 'GEN25AUPC930829', email: 'uigualdaddegenerosaf@congresoedomex.gob.mx', password: hashedPassword },
+      { id: uuidv4(), name: 'OFROOT', email: 'ofrenda25@congresoedomex.gob.mx', password: hashedPassword },
+      { id: uuidv4(), name: 'OFSAGM990220', email: 'martin.sanchez@congresoedomex.gob.mx', password: hashedPassword },
     ];
 
     await queryInterface.bulkInsert(

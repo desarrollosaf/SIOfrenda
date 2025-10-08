@@ -16,9 +16,9 @@ export class RedirectComponent implements OnInit {
   ngOnInit(): void {
 
     const rfc = this.userService.currentUserValue?.rfc ?? '';
-    const role = rfc.startsWith('GEN25') ? 'GEN25' : 'usuario';
+    const role = rfc.startsWith('OF') ? 'OF' : 'usuario';
 
-    if (role == 'GEN25') {
+    if (role == 'OF') {
       this.router.navigate(['/reportes']);
     } else {
       this.router.navigate(['/cuestionario']);

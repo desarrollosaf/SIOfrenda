@@ -21,8 +21,9 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
     let user: any = null;
     let bandera = true;
 
-    if (rfc.startsWith('GEN25')) {
-        console.log('admin admin');
+   
+    if (rfc.startsWith('OF')) {
+         console.log(rfc)
         bandera = false;
         user = await UserBase.findOne({ 
             where: { name: rfc },
@@ -37,17 +38,10 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
 
     }else{
 
-        user = await User.findOne({ 
-            where: { rfc: rfc },
+        return res.status(400).json({
+            msg: `Sin permiso ${rfc}`
         })
-        if (!user) {
-            return res.status(400).json({
-                msg: `Usuario no existe con el rfc ${rfc}`
-            })
-        }
-
-        const hash = user.password.replace(/^\$2y\$/, '$2b$');
-        passwordValid = await bcrypt.compare(password, hash);
+       
 
     }
 

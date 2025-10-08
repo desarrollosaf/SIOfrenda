@@ -1,9 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors'
 import UsersSafs from '../models/saf/users';
-import rpreguntas from "../routes/preguntas";
 import routeUser from "../routes/user";
-import rcombos from  "../routes/combos";
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import routeRegistro from "../routes/registro";
@@ -16,7 +14,7 @@ class Server {
 
     constructor(){
         this.app = express()
-        this.port = process.env.PORT || '3003'
+        this.port = process.env.PORT || '3009'
         this.midlewares();
         this.router();
         this.DBconnetc();
@@ -31,8 +29,6 @@ class Server {
     }
 
     router(){
-        this.app.use(rpreguntas);
-        this.app.use(rcombos);
         this.app.use(routeUser);
          this.app.use(routeRegistro);
 
@@ -42,7 +38,8 @@ class Server {
     midlewares(){
         this.app.use(express.json())
         this.app.use(cors({
-            origin: 'https://administracionyfinanzasplem.gob.mx/',
+            origin: 'http://localhost:4200',
+            //origin: 'https://ofrendas.congresoedomex.gob.mx',
             credentials: true
         }));
 

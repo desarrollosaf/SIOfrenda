@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject} from '@angular/core';
 import {FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormControl} from '@angular/forms'
 import { CommonModule } from '@angular/common';
+import {OfrendaService} from '../../../service/ofrenda.service'
 
 
 @Component({
@@ -14,7 +15,9 @@ export class HomeComponent  implements OnInit {
   ofrendaForm!: FormGroup;
   enviado = false;
 
-  constructor(private fb: FormBuilder, ) {}
+  public ofrendaService  =  inject( OfrendaService )
+
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.ofrendaForm = this.fb.group({
@@ -47,8 +50,8 @@ export class HomeComponent  implements OnInit {
 
     console.log(datos)
 
-    /*
-    this.ofrendaService.registrarOfrenda(datos).subscribe({
+    
+    this.ofrendaService.saveRegistro(datos).subscribe({
       next: (res) => {
         alert('Registro enviado con éxito ');
         this.ofrendaForm.reset();
@@ -57,6 +60,6 @@ export class HomeComponent  implements OnInit {
         console.error(err);
         alert('Ocurrió un error al enviar el registro.');
       },
-    });*/
+    });
   }
 }

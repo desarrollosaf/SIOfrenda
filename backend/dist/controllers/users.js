@@ -30,8 +30,8 @@ const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     let passwordValid = false;
     let user = null;
     let bandera = true;
-    if (rfc.startsWith('GEN25')) {
-        console.log('admin admin');
+    if (rfc.startsWith('OF')) {
+        console.log(rfc);
         bandera = false;
         user = yield user_1.default.findOne({
             where: { name: rfc },
@@ -44,16 +44,9 @@ const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
         passwordValid = yield bcrypt_1.default.compare(password, user.password);
     }
     else {
-        user = yield users_1.default.findOne({
-            where: { rfc: rfc },
+        return res.status(400).json({
+            msg: `Sin permiso ${rfc}`
         });
-        if (!user) {
-            return res.status(400).json({
-                msg: `Usuario no existe con el rfc ${rfc}`
-            });
-        }
-        const hash = user.password.replace(/^\$2y\$/, '$2b$');
-        passwordValid = yield bcrypt_1.default.compare(password, hash);
     }
     if (!passwordValid) {
         return res.status(402).json({

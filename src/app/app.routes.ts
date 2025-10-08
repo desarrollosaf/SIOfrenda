@@ -25,7 +25,7 @@ export const routes: Routes = [
       { path: '',  component: RedirectComponent,
       },
       {
-        path: 'cuestionario',
+        path: 'registros',
         loadChildren: () => import('./views/pages/cuestionario/cuestionario.route')
       },
       {

@@ -15,9 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const users_1 = __importDefault(require("../models/saf/users"));
-const preguntas_1 = __importDefault(require("../routes/preguntas"));
 const user_1 = __importDefault(require("../routes/user"));
-const combos_1 = __importDefault(require("../routes/combos"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const path_1 = __importDefault(require("path"));
 const registro_1 = __importDefault(require("../routes/registro"));
@@ -25,7 +23,7 @@ const auth_1 = require("../middlewares/auth");
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
-        this.port = process.env.PORT || '3003';
+        this.port = process.env.PORT || '3009';
         this.midlewares();
         this.router();
         this.DBconnetc();
@@ -37,15 +35,14 @@ class Server {
         });
     }
     router() {
-        this.app.use(preguntas_1.default);
-        this.app.use(combos_1.default);
         this.app.use(user_1.default);
         this.app.use(registro_1.default);
     }
     midlewares() {
         this.app.use(express_1.default.json());
         this.app.use((0, cors_1.default)({
-            origin: 'https://administracionyfinanzasplem.gob.mx/',
+            origin: 'http://localhost:4200',
+            //origin: 'https://ofrendas.congresoedomex.gob.mx',
             credentials: true
         }));
         this.app.use((0, cookie_parser_1.default)());
