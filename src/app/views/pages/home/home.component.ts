@@ -2,6 +2,7 @@ import { Component, OnInit, inject} from '@angular/core';
 import {FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormControl} from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import {OfrendaService} from '../../../service/ofrenda.service'
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -47,7 +48,10 @@ export class HomeComponent  implements OnInit {
     if (rfc && this.ofrendaForm.get('rfc')?.valid) {
       this.ofrendaService.getRFC(rfc).subscribe({
         next: (data) => {
-          console.log(data)
+          this.ofrendaForm.patchValue({
+            responsable: '',
+            cargo: ''
+          });
           this.ofrendaForm.patchValue({
             responsable: data.Nombre,
             cargo: data.Puesto+' / '+data.departamento.nombre_completo
@@ -55,7 +59,14 @@ export class HomeComponent  implements OnInit {
         },
         error: (err) => {
           console.error('Error al obtener datos del RFC', err);
-          // Opcional: limpiar los campos si no se encuentra el RFC
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Usuario no existe.",
+            showConfirmButton: false,
+            timer: 3000
+          });
+          
           this.ofrendaForm.patchValue({
             responsable: '',
             cargo: ''
