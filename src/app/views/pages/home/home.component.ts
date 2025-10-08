@@ -1,35 +1,62 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormControl} from '@angular/forms'
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent  implements OnInit {
+  ofrendaForm!: FormGroup;
+  enviado = false;
 
-   formularioOfrenda: FormGroup;
+  constructor(private fb: FormBuilder, ) {}
 
-  constructor(private fb: FormBuilder) {
-    this.formularioOfrenda = this.fb.group({
-      nombreEdificio: ['', Validators.required],
+  ngOnInit(): void {
+    this.ofrendaForm = this.fb.group({
+      rfc: ['', Validators.required],
+      edificio: ['', Validators.required],
       direccion: ['', Validators.required],
-      nombreResponsable: ['', Validators.required],
+      responsable: ['', Validators.required],
       cargo: ['', Validators.required],
-      telefono: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
-      descripcionLugar: ['', Validators.required],
-      pisoArea: ['', Validators.required],
-      aceptoCondiciones: [false, Validators.requiredTrue]
+      telefono: [
+        '',
+        [Validators.required, Validators.pattern(/^[0-9]{10}$/)],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      descripcion: ['', Validators.required],
+      piso: ['', Validators.required],
+      acepta: [false, Validators.requiredTrue],
     });
   }
 
-  onSubmit() {
-    if (this.formularioOfrenda.valid) {
-      console.log('Formulario enviado:', this.formularioOfrenda.value);
-      // Aquí puedes hacer POST a tu backend o mostrar confirmación
-    }
+  get f() {
+    return this.ofrendaForm.controls;
   }
 
+  onSubmit(): void {
+    console.log('enviado')
+    this.enviado = true;
+    if (this.ofrendaForm.invalid)  return;
+
+    const datos = this.ofrendaForm.value;
+
+    console.log(datos)
+
+    /*
+    this.ofrendaService.registrarOfrenda(datos).subscribe({
+      next: (res) => {
+        alert('Registro enviado con éxito ');
+        this.ofrendaForm.reset();
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Ocurrió un error al enviar el registro.');
+      },
+    });*/
+  }
 }

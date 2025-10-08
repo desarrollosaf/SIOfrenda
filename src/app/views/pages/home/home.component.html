@@ -1,4 +1,4 @@
-<section class="ofrenda-container">
+<section class="ofrenda-container ofrenda-background">
   <header class="ofrenda-header">
     <div class="logos">
       <img src="assets/logo-congreso.png" alt="Logo Congreso">
@@ -49,50 +49,94 @@
 
   <section class="formulario">
     <h2>Formulario de Registro</h2>
-    <form>
+    <form [formGroup]="ofrendaForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label>Nombre del edificio o área participante</label>
-        <input type="text" />
+        <input type="text" formControlName="edificio" />
+        <small *ngIf="f['edificio'].invalid && f['edificio'].touched" class="error">
+          Campo obligatorio
+        </small>
       </div>
+
       <div class="form-group">
         <label>Dirección o ubicación</label>
-        <input type="text" />
+        <input type="text" formControlName="direccion" />
+        <small *ngIf="f['direccion'].invalid && f['direccion'].touched" class="error">
+          Campo obligatorio
+        </small>
       </div>
 
       <h3>Responsable del equipo</h3>
+
+      <div class="form-group">
+        <label>RFC</label>
+        <input type="text" formControlName="rfc" />
+        <small *ngIf="f['rfc'].invalid && f['rfc'].touched" class="error" >
+          Campo obligatorio
+        </small>
+      </div>
+
       <div class="form-group">
         <label>Nombre completo</label>
-        <input type="text" />
+        <input type="text" formControlName="responsable" />
+        <small *ngIf="f['responsable'].invalid && f['responsable'].touched" class="error">
+          Campo obligatorio
+        </small>
       </div>
+
       <div class="form-group">
         <label>Cargo / Área</label>
-        <input type="text" />
+        <input type="text" formControlName="cargo" />
+        <small *ngIf="f['cargo'].invalid && f['cargo'].touched" class="error">
+          Campo obligatorio
+        </small>
       </div>
+
       <div class="form-group">
         <label>Teléfono de contacto</label>
-        <input type="tel" />
+        <input type="tel" formControlName="telefono" />
+        <small *ngIf="f['telefono'].invalid && f['telefono'].touched" class="error">
+          Ingresa un número válido (10 dígitos)
+        </small>
       </div>
+
       <div class="form-group">
         <label>Correo electrónico</label>
-        <input type="email" />
+        <input type="email" formControlName="email" />
+        <small *ngIf="f['email'].invalid && f['email'].touched" class="error">
+          Ingresa un correo válido
+        </small>
       </div>
 
       <h3>Espacio Designado para la Ofrenda</h3>
+
       <div class="form-group">
         <label>Descripción breve del lugar</label>
-        <input type="text" />
+        <input type="text" formControlName="descripcion" />
+        <small *ngIf="f['descripcion'].invalid && f['descripcion'].touched" class="error">
+          Campo obligatorio
+        </small>
       </div>
+
       <div class="form-group">
         <label>Piso / área específica</label>
-        <input type="text" />
+        <input type="text" formControlName="piso" />
+        <small *ngIf="f['piso'].invalid && f['piso'].touched" class="error">
+          Campo obligatorio
+        </small>
       </div>
 
       <div class="checkbox">
-        <input type="checkbox" id="acepto" />
+        <input type="checkbox" id="acepto" formControlName="acepta" />
         <label for="acepto">Acepto participar conforme a las bases establecidas.</label>
       </div>
+      <small *ngIf="f['acepta'].invalid && f['acepta'].touched" class="error">
+        Debes aceptar para continuar
+      </small>
 
-      <button type="submit" class="btn-enviar">Enviar Registro</button>
+      <button type="submit" class="btn-enviar" [disabled]="ofrendaForm.invalid">
+        Enviar Registro
+      </button>
     </form>
   </section>
 </section>
