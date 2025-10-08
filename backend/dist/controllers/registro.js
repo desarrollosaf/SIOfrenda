@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getdatos = void 0;
+exports.saveregistro = exports.getdatos = void 0;
 const s_usuario_1 = __importDefault(require("../models/saf/s_usuario"));
 const t_dependencia_1 = __importDefault(require("../models/saf/t_dependencia"));
 const t_direccion_1 = __importDefault(require("../models/saf/t_direccion"));
 const t_departamento_1 = __importDefault(require("../models/saf/t_departamento"));
+const registro_1 = __importDefault(require("../models/registro"));
 const getdatos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     const { rfc } = req.params;
@@ -51,3 +52,39 @@ const getdatos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.json(Object.assign(Object.assign({}, usuario.toJSON()), { ubicacion_completa }));
 });
 exports.getdatos = getdatos;
+const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { body } = req;
+        const limite = 3;
+        const Existente = yield registro_1.default.findOne({
+            where: { rfc_responsable: body.rfc }
+        });
+        if (Existente) {
+            return res.status(400).json({
+                status: 400,
+                msg: "Ya existe un registro con ese RFC"
+            });
+        }
+        const cita = yield registro_1.default.create({
+            nombre_edificio: body.edificio,
+            ubicacion: body.direccion,
+            rfc_responsable: body.rfc,
+            nombre_responsable: body.responsable,
+            cargo: body.cargo,
+            telefono: body.telefono,
+            correo: body.email,
+            descripcion_lugar: body.descripcion,
+            piso_area: body.piso,
+            acepto: 1
+        });
+        return res.json({
+            status: 200,
+            msg: "Registro correctamente",
+        });
+    }
+    catch (error) {
+        console.error('Error al guardar:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor' });
+    }
+});
+exports.saveregistro = saveregistro;
