@@ -20,6 +20,7 @@ const user_1 = __importDefault(require("../routes/user"));
 const combos_1 = __importDefault(require("../routes/combos"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const path_1 = __importDefault(require("path"));
+const registro_1 = __importDefault(require("../routes/registro"));
 const auth_1 = require("../middlewares/auth");
 class Server {
     constructor() {
@@ -39,6 +40,7 @@ class Server {
         this.app.use(preguntas_1.default);
         this.app.use(combos_1.default);
         this.app.use(user_1.default);
+        this.app.use(registro_1.default);
     }
     midlewares() {
         this.app.use(express_1.default.json());
@@ -51,6 +53,7 @@ class Server {
         this.app.use((req, res, next) => {
             const publicPaths = [
                 '/api/user/login',
+                '/api/registro/datos/',
             ];
             const isPublic = publicPaths.some(path => req.originalUrl.startsWith(path));
             if (isPublic) {

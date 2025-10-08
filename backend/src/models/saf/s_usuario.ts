@@ -36,33 +36,36 @@ class SUsuario extends Model<
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
   declare deletedAt: Date | null;
+  declare dependencia?: import('../saf/t_dependencia').default;
+  declare direccion?: import('../saf/t_direccion').default;
+  declare departamento?: import('../saf/t_departamento').default;
 
   
-  static associate(models: any) {
-    SUsuario.belongsTo(Dependencia, {
-      // sourceKey: 'id_Dependencia',         
-      foreignKey: 'id_Dependencia',   
-      as: 'dependencia',
-    });
+  // static associate(models: any) {
+  //   SUsuario.belongsTo(Dependencia, {
+  //     // sourceKey: 'id_Dependencia',         
+  //     foreignKey: 'id_Dependencia',   
+  //     as: 'dependencia',
+  //   });
 
-    SUsuario.belongsTo(Direccion, {
-      // sourceKey: 'id_Direccion',         
-      foreignKey: 'id_Direccion',   
-      as: 'direccion',
-    });
+  //   SUsuario.belongsTo(Direccion, {
+  //     // sourceKey: 'id_Direccion',         
+  //     foreignKey: 'id_Direccion',   
+  //     as: 'direccion',
+  //   });
 
-    SUsuario.belongsTo(Departamento, {
-      // sourceKey: 'id_Departamento',         
-      foreignKey: 'id_Departamento',   
-      as: 'departamento',
-    });
+  //   SUsuario.belongsTo(Departamento, {
+  //     // sourceKey: 'id_Departamento',         
+  //     foreignKey: 'id_Departamento',   
+  //     as: 'departamento',
+  //   });
 
-    SUsuario.belongsTo(sesion,{
-      targetKey: "id_usuario",
-      foreignKey: 'N_Usuario',
-      as: "m_cuestionario"
-    })
-  }
+  //   SUsuario.belongsTo(sesion,{
+  //     targetKey: "id_usuario",
+  //     foreignKey: 'N_Usuario',
+  //     as: "m_cuestionario"
+  //   })
+  // }
 }
 
 SUsuario.init(
@@ -185,6 +188,9 @@ SUsuario.init(
     ],
   }
 );
+SUsuario.belongsTo(Dependencia, { as: 'dependencia', foreignKey: 'id_Dependencia' });
+SUsuario.belongsTo(Direccion, { as: 'direccion', foreignKey: 'id_Direccion' });
+SUsuario.belongsTo(Departamento, { as: 'departamento', foreignKey: 'id_Departamento' });
 
 
 
