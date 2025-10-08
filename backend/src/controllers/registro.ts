@@ -91,6 +91,23 @@ export const saveregistro = async (req: Request, res: Response): Promise<any> =>
 
   export const getregistros = async (req: Request, res: Response): Promise<any> => {
     const registros = await Registro.findAll();
+
+    for (const registro of registros) {
+      if (registro.rfc_responsable) {
+        const usuario = await SUsuario.findOne({
+          where: { N_Usuario: registro.rfc_responsable },
+          include: [
+            { model: Dependencia, as: "dependencia", attributes: ["nombre_completo"] },
+            { model: Direccion, as: "direccion", attributes: ["nombre_completo"] },
+            { model: Departamento, as: "departamento", attributes: ["nombre_completo"] }
+          ]
+        });
+        if (usuario) {
+          registro.setDataValue("datos", usuario);
+        }
+      }
+    }
+
     return res.json({
         data: registros
     });

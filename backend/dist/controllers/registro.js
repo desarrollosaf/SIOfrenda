@@ -90,6 +90,21 @@ const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.saveregistro = saveregistro;
 const getregistros = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const registros = yield registro_1.default.findAll();
+    for (const registro of registros) {
+        if (registro.rfc_responsable) {
+            const usuario = yield s_usuario_1.default.findOne({
+                where: { N_Usuario: registro.rfc_responsable },
+                include: [
+                    { model: t_dependencia_1.default, as: "dependencia", attributes: ["nombre_completo"] },
+                    { model: t_direccion_1.default, as: "direccion", attributes: ["nombre_completo"] },
+                    { model: t_departamento_1.default, as: "departamento", attributes: ["nombre_completo"] }
+                ]
+            });
+            if (usuario) {
+                registro.setDataValue("datos", usuario);
+            }
+        }
+    }
     return res.json({
         data: registros
     });
