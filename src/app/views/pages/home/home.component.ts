@@ -66,7 +66,7 @@ export class HomeComponent  implements OnInit {
             showConfirmButton: false,
             timer: 3000
           });
-          
+
           this.ofrendaForm.patchValue({
             responsable: '',
             cargo: ''
@@ -91,7 +91,13 @@ export class HomeComponent  implements OnInit {
     
     this.ofrendaService.saveRegistro(datos).subscribe({
       next: (res) => {
-        alert('Registro enviado con éxito ');
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Envio exitoso.",
+            showConfirmButton: false,
+            timer: 3000
+          });
         this.ofrendaForm.reset();
       },
       error: (err) => {
