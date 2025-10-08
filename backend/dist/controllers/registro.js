@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveregistro = exports.getdatos = void 0;
+exports.getregistros = exports.saveregistro = exports.getdatos = void 0;
 const s_usuario_1 = __importDefault(require("../models/saf/s_usuario"));
 const t_dependencia_1 = __importDefault(require("../models/saf/t_dependencia"));
 const t_direccion_1 = __importDefault(require("../models/saf/t_direccion"));
@@ -88,3 +88,10 @@ const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.saveregistro = saveregistro;
+const getregistros = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const registros = yield registro_1.default.findAll();
+    return res.json({
+        data: registros
+    });
+});
+exports.getregistros = getregistros;
