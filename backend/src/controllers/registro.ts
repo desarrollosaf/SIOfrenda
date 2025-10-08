@@ -3,6 +3,7 @@ import SUsuario from "../models/saf/s_usuario";
 import Dependencia from "../models/saf/t_dependencia";
 import Direccion from "../models/saf/t_direccion";
 import Departamento from "../models/saf/t_departamento";
+import Registro from "../models/registro";
 
 export const getdatos = async (req: Request, res: Response): Promise<any> => {
      const { rfc } = req.params;
@@ -47,3 +48,43 @@ export const getdatos = async (req: Request, res: Response): Promise<any> => {
         });
 
 }
+
+export const saveregistro = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { body } = req;
+    const limite = 3;
+
+    
+    const Existente = await Registro.findOne({
+      where: { rfc_responsable: body.rfc }
+    });
+
+    if (Existente) {
+      return res.status(400).json({
+        status: 400,
+        msg: "Ya existe un registro con ese RFC"
+      });
+    }
+     const cita = await Registro.create({
+      nombre_edificio: body.edificio,
+      ubicacion: body.direccion,
+      rfc_responsable: body.rfc,
+      nombre_responsable: body.responsable,
+      cargo: body.cargo,
+      telefono: body.telefono,
+      correo: body.email,
+      descripcion_lugar: body.descripcion,
+      piso_area: body.piso,
+      acepto: 1
+    });
+    return res.json({
+        status: 200,
+        msg: "Registro correctamente",
+    });
+
+    } catch (error) {
+      console.error('Error al guardar:', error);
+      return res.status(500).json({ msg: 'Error interno del servidor' });
+    }
+   
+  }
