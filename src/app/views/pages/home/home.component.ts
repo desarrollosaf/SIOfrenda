@@ -82,7 +82,39 @@ export class HomeComponent  implements OnInit {
   onSubmit(): void {
     console.log('enviado')
     this.enviado = true;
-    if (this.ofrendaForm.invalid)  return;
+    if (this.ofrendaForm.invalid) {
+      const telefonoControl = this.f['telefono'];
+      const telefonoValue = telefonoControl.value;
+
+      const emailControl = this.f['email'];
+      const emailValue = emailControl.value;
+
+      if (telefonoValue && telefonoControl.invalid) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Número de teléfono inválido',
+          text: 'Ingresa solo 10 dígitos sin espacios ni guiones (por ejemplo: 5512345678).',
+        });
+        return;
+      }
+
+      if (emailValue && emailControl.invalid) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Correo electrónico inválido',
+          text: 'Por favor ingresa un correo válido (ej. usuario@dominio.com).',
+        });
+        return;
+      }
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Formulario incompleto',
+        text: 'Por favor llena todos los campos.',
+      });
+
+      return;
+    }
 
     const datos = this.ofrendaForm.value;
 
