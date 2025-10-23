@@ -15,12 +15,26 @@ import Swal from 'sweetalert2';
 export class HomeComponent  implements OnInit {
   ofrendaForm!: FormGroup;
   enviado = false;
+  registroActivo = true; 
 
   public ofrendaService  =  inject( OfrendaService )
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.registroActivo = false
+     Swal.fire({
+      icon: 'info',
+      title: 'Registro cerrado',
+      html: `
+        <p>El periodo de registro finalizó.</p>
+        <p>Actualmente estamos en la etapa de <b>montaje</b>.</p>
+        <p>¡Gracias por tu interés y mucha suerte a todos los participantes!</p>
+      `,
+      confirmButtonText: 'Entendido',
+      confirmButtonColor: '#6A1B9A'
+    });
+
     this.ofrendaForm = this.fb.group({
       rfc: ['', Validators.required],
       edificio: ['', Validators.required],
@@ -80,7 +94,19 @@ export class HomeComponent  implements OnInit {
 
   
   onSubmit(): void {
-    console.log('enviado')
+    Swal.fire({
+      icon: 'info',
+      title: 'Registro cerrado',
+      html: `
+        <p>El periodo de registro finalizó.</p>
+        <p>Actualmente estamos en la etapa de <b>montaje</b>.</p>
+        <p>¡Gracias por tu interés y mucha suerte a todos los participantes!</p>
+      `,
+      confirmButtonText: 'Entendido',
+      confirmButtonColor: '#6A1B9A'
+    });
+      return;
+
     this.enviado = true;
     if (this.ofrendaForm.invalid) {
       const telefonoControl = this.f['telefono'];
