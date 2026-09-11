@@ -22,8 +22,8 @@ export class HomeComponent  implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.registroActivo = false
-     Swal.fire({
+    this.registroActivo = true
+    /*Swal.fire({
       icon: 'info',
       title: 'Registro cerrado',
       html: `
@@ -33,7 +33,7 @@ export class HomeComponent  implements OnInit {
       `,
       confirmButtonText: 'Entendido',
       confirmButtonColor: '#6A1B9A'
-    });
+    });*/
 
     this.ofrendaForm = this.fb.group({
       rfc: ['', Validators.required],
@@ -94,7 +94,7 @@ export class HomeComponent  implements OnInit {
 
   
   onSubmit(): void {
-    Swal.fire({
+    /*Swal.fire({
       icon: 'info',
       title: 'Registro cerrado',
       html: `
@@ -105,7 +105,7 @@ export class HomeComponent  implements OnInit {
       confirmButtonText: 'Entendido',
       confirmButtonColor: '#6A1B9A'
     });
-      return;
+      return;*/
 
     this.enviado = true;
     if (this.ofrendaForm.invalid) {
