@@ -1,4 +1,5 @@
 import { Request, Response } from "express"
+import { Op } from "sequelize"
 import SUsuario from "../models/saf/s_usuario";
 import Dependencia from "../models/saf/t_dependencia";
 import Direccion from "../models/saf/t_direccion";
@@ -90,7 +91,15 @@ export const saveregistro = async (req: Request, res: Response): Promise<any> =>
   }
 
   export const getregistros = async (req: Request, res: Response): Promise<any> => {
-    const registros = await Registro.findAll();
+    const anioActual = new Date().getFullYear();
+    const registros = await Registro.findAll({
+      where: {
+        createdAt: {
+          [Op.gte]: new Date(anioActual, 0, 1),
+          [Op.lt]: new Date(anioActual + 1, 0, 1)
+        }
+      }
+    });
 
     for (const registro of registros) {
       if (registro.rfc_responsable) {

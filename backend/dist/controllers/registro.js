@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getregistros = exports.saveregistro = exports.getdatos = void 0;
+const sequelize_1 = require("sequelize");
 const s_usuario_1 = __importDefault(require("../models/saf/s_usuario"));
 const t_dependencia_1 = __importDefault(require("../models/saf/t_dependencia"));
 const t_direccion_1 = __importDefault(require("../models/saf/t_direccion"));
@@ -89,7 +90,15 @@ const saveregistro = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.saveregistro = saveregistro;
 const getregistros = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const registros = yield registro_1.default.findAll();
+    const anioActual = new Date().getFullYear();
+    const registros = yield registro_1.default.findAll({
+        where: {
+            createdAt: {
+                [sequelize_1.Op.gte]: new Date(anioActual, 0, 1),
+                [sequelize_1.Op.lt]: new Date(anioActual + 1, 0, 1)
+            }
+        }
+    });
     for (const registro of registros) {
         if (registro.rfc_responsable) {
             const usuario = yield s_usuario_1.default.findOne({
