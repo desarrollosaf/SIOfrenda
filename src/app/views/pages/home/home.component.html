@@ -354,7 +354,7 @@
             <div class="formgrid">
               <div class="field">
                 <label for="f-rfc">RFC</label>
-                <input id="f-rfc" type="text" formControlName="rfc" maxlength="13" placeholder="13 caracteres"
+                <input id="f-rfc" type="text" formControlName="rfc" maxlength="10" placeholder="10 caracteres"
                        style="text-transform: uppercase;" (input)="onRfcInput()" (blur)="onRfcBlur()"
                        [class.bad]="f['rfc'].invalid && (f['rfc'].touched || enviado)">
                 <small class="err" *ngIf="f['rfc'].invalid && (f['rfc'].touched || enviado)">Campo obligatorio</small>
